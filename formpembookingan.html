@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Peminjaman Ruang</title>
+    <link rel="stylesheet" href="stylepembooking/style.css">
+</head>
+<body>
+    <div class="container">
+        <form class="form-container" id="booking-form">
+            <h2>Form Peminjaman Ruang</h2>
+            <input type="text" id="name-field" name="nama" placeholder="Nama" required>
+            <input type="text" id="room-field" name="ruang" placeholder="Ruang" required readonly>
+            <input type="text" id="day-field" name="hari" placeholder="Hari" required readonly>
+            <input type="text" id="activity-field" name="kegiatan" placeholder="Kegiatan" required>
+            <input type="date" id="date-field" name="tanggal" placeholder="Tanggal" required>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="success-popup">
+        <div class="popup-content">
+            <div class="popup-title">Anda Telah Berhasil Membooking Ruang</div>
+            <div class="booking-details">
+                <div class="day-column">
+                    <div class="day-header" id="popup-day">SENIN</div>
+                    <div class="room-number" id="popup-room">C101</div>
+                </div>
+            </div>
+            <button class="popup-button" id="back-button">Kembali</button>
+        </div>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    // Fungsi untuk menyimpan data booking
+    function saveBooking(room, day) {
+        // Ambil data booking yang sudah ada
+        let bookings = JSON.parse(localStorage.getItem('roomBookings')) || {};
+        
+        // Jika belum ada data untuk hari ini, buat array kosong
+        if (!bookings[day]) {
+            bookings[day] = [];
+        }
+        
+        // Tambahkan ruangan ke daftar booking hari tersebut jika belum ada
+        if (!bookings[day].includes(room)) {
+            bookings[day].push(room);
+        }
+        
+        // Simpan kembali ke localStorage
+        localStorage.setItem('roomBookings', JSON.stringify(bookings));
+        
+        console.log(`Ruangan ${room} pada hari ${day} berhasil dibooking!`);
+        console.log("Data di localStorage:", JSON.stringify(bookings));
+    }
+
+    // Fungsi untuk memuat data booking dari localStorage
+    function loadBookings() {
+        const bookings = JSON.parse(localStorage.getItem('roomBookings')) || {};
+        console.log("Data booking dari localStorage:", bookings);
+        
+        // Loop through all rooms
+        const rooms = document.querySelectorAll('.room');
+        rooms.forEach(room => {
+            const roomId = room.textContent.trim();
+            const day = room.closest('.main-content').querySelector('.header').textContent.trim();
+            
+            console.log(`Memeriksa ruangan ${roomId} pada hari ${day}`);
+            
+            // Check if this room is booked on this day
+            if (bookings[day] && bookings[day].includes(roomId)) {
+                console.log(`Ruangan ${roomId} pada hari ${day} sudah dibooking.`);
+                // Mark room as booked
+                room.classList.remove('available');
+                room.classList.add('booked');
+            } else {
+                // Pastikan ruangan yang belum dibooking tetap hijau (available)
+                room.classList.remove('booked');
+                room.classList.add('available');
+            }
+        });
+    }
+
+    // Mendapatkan parameter dari URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomId = urlParams.get('room');
+    const day = urlParams.get('day');
+    
+    // Menggunakan nilai parameter
+    console.log(`Booking untuk ruangan ${roomId} di hari ${day}`);
+    
+    // Mengisi form dengan nilai parameter (jika ada)
+    if (roomId && day) {
+        document.getElementById('room-field').value = roomId;
+        document.getElementById('day-field').value = day;
+        
+        // Tentukan tanggal berdasarkan hari
+        setDateByDay(day);
+    }
+    
+    // Fungsi untuk mengatur tanggal berdasarkan hari
+    function setDateByDay(day) {
+        const today = new Date();
+        const currentDay = today.getDay(); // 0 = Minggu, 1 = Senin, dst.
+        let targetDay;
+        
+        // Menentukan nilai targetDay berdasarkan nama hari
+        switch (day.toUpperCase()) {
+            case 'SENIN':
+                targetDay = 1;
+                break;
+            case 'SELASA':
+                targetDay = 2;
+                break;
+            case 'RABU':
+                targetDay = 3;
+                break;
+            case 'KAMIS':
+                targetDay = 4;
+                break;
+            case "JUM'AT":
+            case "JUMAT":
+                targetDay = 5;
+                break;
+            default:
+                targetDay = currentDay;
+        }
+        
+        // Hitung selisih hari
+        let daysToAdd = (targetDay - currentDay + 7) % 7;
+        if (daysToAdd === 0) daysToAdd = 7; // Jika hari ini, tambahkan 7 hari (minggu depan)
+        
+        // Buat tanggal baru
+        const targetDate = new Date(today);
+        targetDate.setDate(today.getDate() + daysToAdd);
+        
+        // Format tanggal sebagai YYYY-MM-DD untuk input type date
+        const formattedDate = targetDate.toISOString().split('T')[0];
+        document.getElementById('date-field').value = formattedDate;
+    }
+    
+    // Handle form submission
+    document.getElementById('booking-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Collect form data
+        const formData = {
+            nama: document.getElementById('name-field').value,
+            ruang: document.getElementById('room-field').value,
+            hari: document.getElementById('day-field').value,
+            kegiatan: document.getElementById('activity-field').value,
+            tanggal: document.getElementById('date-field').value
+        };
+        
+        // Simpan data booking
+        saveBooking(formData.ruang, formData.hari);
+        
+        // Set values in popup
+        document.getElementById('popup-day').textContent = formData.hari;
+        document.getElementById('popup-room').textContent = formData.ruang;
+        
+        // Show popup
+        document.getElementById('success-popup').style.display = 'flex';
+    });
+    
+    // Handle popup close button
+    document.getElementById('back-button').addEventListener('click', function() {
+        // Hide popup
+        document.getElementById('success-popup').style.display = 'none';
+        
+        // Redirect to booking page
+        window.location.href = "booking_ruang.html";
+    });
+
+    // Panggil loadBookings saat halaman dimuat
+    loadBookings();
+});
+    </script>
+</body>
+</html>

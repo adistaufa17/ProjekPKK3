@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAPORAN</title>
+    <link rel="stylesheet" href="styleDetailLaporan/style_detail_laporan.css">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #e8e8e8;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #555;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #000;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #0b3a5d;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .room-detail {
+            display: flex;
+            gap: 20px;
+        }
+
+        .room-image {
+            width: 250px;
+            height: 180px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .room-info {
+            flex: 1;
+        }
+
+        .room-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .room-type {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .room-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .room-schedule {
+            text-align: right;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .room-detail {
+                flex-direction: column;
+            }
+            
+            .room-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iIzMzOTlDQyIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9IjIiLz48cGF0aCBkPSJNNTAgMjBjMTYuNTY5IDAgMzAgMTMuNDMxIDMwIDMwIDAgMTYuNTY5LTEzLjQzMSAzMC0zMCAzMC0xNi41NjkgMC0zMC0xMy40MzEtMzAtMzBDMjAgMzMuNDMxIDMzLjQzMSAyMCA1MCAyMHptMCA1YTI1IDI1IDAgMTAwIDUwIDI1IDI1IDAgMDAwLTUweiIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjUwIiBjeT0iMzUiIHI9IjEwIiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTMwIDYwYzAtMTEgOS05IDIwLTkgMTEgMCAyMC0yIDIwIDkgMCA4LTYgMTUtMjAgMTVzLTIwLTctMjAtMTV6IiBmaWxsPSIjZmZmIi8+PC9zdmc+" alt="Logo" class="logo">
+        
+        <ul class="nav-items">
+            <a href="booking_ruang.html"><li class="nav-item"><i class="fas fa-calendar-check" ></i> Booking Ruang</li></a>
+            <a href=""><li class="nav-item"><i class="fas fa-user-shield"></i> Admin</li></a>
+            <a href="beranda.html"><li class="nav-item active"><i class="fas fa-file-alt"></i> Beranda</li></a>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">LAPORAN</div>
+        <div class="content-area">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Cari laporan...">
+            </div>
+
+            <!-- Cards Container -->
+            <div class="cards-container">
+                <!-- Buku Tamu Card -->
+                <div class="card guestbook-card" data-name="Nama Ruang" data-type="Ekstrakurikuler" data-desc="Deskripsi kegiatan">
+                    <div class="card-image">
+                        <i class="fas fa-book fa-2x"></i><br>
+                        BUKU TAMU
+                    </div>
+                    <div class="card-content">
+                        <div>
+                            <div class="card-header">
+                                <span class="card-title">Nama Ruang</span>
+                                <span class="card-status">Aktif</span>
+                            </div>
+                            <div class="card-meta">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMS Card -->
+                <div class="card sms-card" data-name="Sudi Moro Karyana (SMK)" data-type="Ekstrakurikuler" data-desc="Kegiatan belajar mengajar">
+                    <div class="card-image">
+                        <i class="fas fa-sms fa-2x"></i><br>
+                        SMS
+                    </div>
+                    <div class="card-content">
+                        <div>
+                            <div class="card-header">
+                                <span class="card-title">Sudi Moro Karyana (SMK)</span>
+                                <span class="card-status offline">Offline</span>
+                            </div>
+                            <div class="card-meta">090</div>
+                        </div>
+                        <div class="card-details">
+                            <i class="fas fa-signal"></i> Signal: 0 | 
+                            <i class="far fa-clock"></i> 16-07-22 08:12 | 
+                            <i class="fas fa-coins"></i> Kredit: 0
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (shown when no results found) -->
+            <div class="empty-state">
+                <i class="fas fa-search"></i>
+                <h3>Tidak ada hasil ditemukan</h3>
+                <p>Coba kata kunci pencarian lain</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detail Ruang -->
+    <div id="roomDetailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2>Detail Ruang</h2>
+            </div>
+            <div class="modal-body">
+                <div class="room-detail">
+                    <div class="room-image">
+                        FOTO RUANG
+                    </div>
+                    <div class="room-info">
+                        <div class="room-name">Nama Ruang</div>
+                        <div class="room-type">Ekstrakurikuler</div>
+                        <div class="room-description">Deskripsi kegiatan</div>
+                        <div class="room-schedule">Waktu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    const pageName = this.textContent.trim();
+                    console.log(`Navigated to: ${pageName}`);
+                });
+            });
+
+            // Enhanced search functionality
+            const searchBar = document.querySelector('.search-bar');
+            const cardsContainer = document.querySelector('.cards-container');
+            const emptyState = document.querySelector('.empty-state');
+            const cards = document.querySelectorAll('.card');
+            
+            searchBar.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let resultsFound = false;
+                
+                cards.forEach(card => {
+                    const cardContent = card.textContent.toLowerCase();
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const meta = card.querySelector('.card-meta').textContent.toLowerCase();
+                    const cardDetails = card.querySelector('.card-details')?.textContent.toLowerCase() || '';
+                    
+                    // More comprehensive search across all card content
+                    if (cardContent.includes(searchTerm) || 
+                        title.includes(searchTerm) || 
+                        meta.includes(searchTerm) || 
+                        cardDetails.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                        resultsFound = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Toggle empty state message
+                if (resultsFound) {
+                    cardsContainer.style.display = 'flex';
+                    emptyState.style.display = 'none';
+                } else {
+                    cardsContainer.style.display = 'none';
+                    emptyState.style.display = 'block';
+                }
+            });
+            
+            // Modal functionality
+            const modal = document.getElementById("roomDetailModal");
+            const closeBtn = document.querySelector(".close-modal");
+            
+            // Open modal when card is clicked
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Get data from card
+                    const name = this.getAttribute('data-name');
+                    const type = this.getAttribute('data-type');
+                    const desc = this.getAttribute('data-desc');
+                    
+                    // Set modal data
+                    modal.querySelector('.room-name').textContent = name;
+                    modal.querySelector('.room-type').textContent = type;
+                    modal.querySelector('.room-description').textContent = desc;
+                    modal.querySelector('.room-schedule').textContent = "Waktu";
+                    
+                    // Show modal
+                    modal.style.display = "flex";
+                    
+                    // Add a subtle click effect
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+            
+            // Close modal when clicking X
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            // Close modal when clicking outside
+            window.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

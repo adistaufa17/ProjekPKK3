@@ -1,0 +1,169 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #0b3a5d;
+    color: white;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+
+.menu {
+    list-style: none;
+    width: 100%;
+}
+
+.menu-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    color: white;
+}
+
+.menu-item:hover {
+    background-color: #1a5380;
+}
+
+.container {
+    margin-left: 200px;
+    width: calc(100% - 200px);
+    overflow-y: auto;
+}
+
+.main-content {
+    margin-left: 6%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #7fb3d5;
+    color: white;
+    padding: 15px 20px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+
+.room-grid {
+    background-color: #f9e8c0;
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 10px;
+}
+
+.room-row {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 10px;
+}
+
+.room {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.1s;
+    font-size: 14px;
+    height: 50px;
+    color: white;
+}
+
+.room:hover {
+    transform: scale(1.05);
+}
+
+.available {
+    background-color: #50e370;
+}
+
+.booked {
+    background-color: #e74c3c;
+}
+
+.selected {
+    border: 3px solid #000;
+}
+/* Room popup details - style baru */
+.room-popup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #000;
+    color: white;
+    display: none;
+    padding: 20px;
+    z-index: 100;
+}
+
+.room-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-message {
+    font-size: 16px;
+}
+
+.booking-message p {
+    margin: 0;
+}
+
+.selected-room, .selected-day {
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.button {
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.button-cancel {
+    background-color: #333;
+    color: white;
+}
+
+.button-next {
+    background-color: #4dabf5;
+    color: white;
+}

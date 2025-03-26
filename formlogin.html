@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Aplikasi Booking Ruang</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #003049;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .modal {
+            background-color: #FEF6E4;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            padding: 24px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            padding-left: 36px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: transparent;
+            font-size: 14px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 8px;
+            top: 12px;
+            color: #666;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: #003049;
+            color: white;
+        }
+
+        /* Icon styles using Unicode characters */
+        .icon-user:before {
+            content: "👤";
+        }
+        
+        .icon-lock:before {
+            content: "🔒";
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Modal (Image 1) -->
+    <div class="modal login-modal">
+        <div class="modal-header">
+            <div class="modal-title">Login</div>
+            <button class="close-btn">×</button>
+        </div>
+        <div class="input-group">
+            <i class="icon-user"></i>
+            <input type="text" placeholder="Username">
+        </div>
+        <div class="input-group">
+            <i class="icon-lock"></i>
+            <input type="password" placeholder="Password">
+        </div>
+        <button class="btn btn-primary">Masuk sekarang</button>
+    </div>
+
+    <script>
+        // Event listener untuk tombol close
+        document.querySelector('.close-btn').addEventListener('click', () => {
+            alert('Close button clicked');
+        });
+
+        // Event listener untuk tombol login
+        document.querySelector('.btn-primary').addEventListener('click', () => {
+            alert('Login button clicked');
+        });
+    </script>
+</body>
+</html>

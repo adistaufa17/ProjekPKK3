@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAPORAN</title>
+    <link rel="stylesheet" href="styleLaporan/style.css">
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img class="logo" src="styleberanda/logo.png" alt="Logo MPK">        
+        <ul class="nav-items">
+            <a href="booking_ruang.html"><li class="nav-item"><i class="fas fa-calendar-check" ></i> Booking Ruang</li></a>
+            <a href=""><li class="nav-item"><i class="fas fa-user-shield"></i> Admin</li></a>
+            <a href="beranda.html"><li class="nav-item active"><i class="fas fa-file-alt"></i> Beranda</li></a>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">LAPORAN</div>
+        <div class="content-area">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Cari laporan...">
+            </div>
+
+            <!-- Cards Container -->
+            <div class="cards-container">
+                <!-- Buku Tamu Card -->
+                <div class="card guestbook-card">
+                    <div class="card-image">
+                        <i class="fas fa-book fa-2x"></i><br>
+                        BUKU TAMU
+                    </div>
+                    <div class="card-content">
+                        <div>
+                            <div class="card-header">
+                                <span class="card-title">Nama Ruang</span>
+                                <span class="card-status">Aktif</span>
+                            </div>
+                            <div class="card-meta">Administrator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SMS Card -->
+                <div class="card sms-card">
+                    <div class="card-image">
+                        <i class="fas fa-sms fa-2x"></i><br>
+                        SMS
+                    </div>
+                    <div class="card-content">
+                        <div>
+                            <div class="card-header">
+                                <span class="card-title">Sudi Moro Karyana (SMK)</span>
+                                <span class="card-status offline">Offline</span>
+                            </div>
+                            <div class="card-meta">090</div>
+                        </div>
+                        <div class="card-details">
+                            <i class="fas fa-signal"></i> Signal: 0 | 
+                            <i class="far fa-clock"></i> 16-07-22 08:12 | 
+                            <i class="fas fa-coins"></i> Kredit: 0
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (shown when no results found) -->
+            <div class="empty-state">
+                <i class="fas fa-search"></i>
+                <h3>Tidak ada hasil ditemukan</h3>
+                <p>Coba kata kunci pencarian lain</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation functionality
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // You could add page navigation here
+                    const pageName = this.textContent.trim();
+                    console.log(`Navigated to: ${pageName}`);
+                    // window.location.href = pageName.toLowerCase().replace(/\s+/g, '-') + '.html';
+                });
+            });
+
+            // Enhanced search functionality
+            const searchBar = document.querySelector('.search-bar');
+            const cardsContainer = document.querySelector('.cards-container');
+            const emptyState = document.querySelector('.empty-state');
+            const cards = document.querySelectorAll('.card');
+            
+            searchBar.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let resultsFound = false;
+                
+                cards.forEach(card => {
+                    const cardContent = card.textContent.toLowerCase();
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const meta = card.querySelector('.card-meta').textContent.toLowerCase();
+                    const cardDetails = card.querySelector('.card-details')?.textContent.toLowerCase() || '';
+                    
+                    // More comprehensive search across all card content
+                    if (cardContent.includes(searchTerm) || 
+                        title.includes(searchTerm) || 
+                        meta.includes(searchTerm) || 
+                        cardDetails.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                        resultsFound = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Toggle empty state message
+                if (resultsFound) {
+                    cardsContainer.style.display = 'flex';
+                    emptyState.style.display = 'none';
+                } else {
+                    cardsContainer.style.display = 'none';
+                    emptyState.style.display = 'block';
+                }
+            });
+            
+            // Card click functionality with improved visual feedback
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const cardTitle = this.querySelector('.card-title').textContent;
+                    
+                    // Add a subtle click effect
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                    
+                    console.log(`Card clicked: ${cardTitle}`);
+                    // Additional functionality can be added here
+                    // For example, you could open a modal with more details
+                });
+            });
+        });
+    </script>
+</body>
+</html>
