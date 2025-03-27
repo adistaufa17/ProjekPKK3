@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Team Showcase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --color-bg: #f4f7f6;
+            --color-primary: #2c3e50;
+            --color-secondary: #3498db;
+            --color-accent: #2ecc71;
+            --color-text: #333;
+            --shadow: rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .team-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .team-title h1 {
+            font-size: 3rem;
+            color: var(--color-primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--color-secondary);
+        }
+
+        .team-sections {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .team-section {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 30px;
+            width: calc(50% - 30px);
+            min-width: 350px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--color-secondary);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--color-accent);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .team-member {
+            background-color: var(--color-bg);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: var(--color-secondary);
+        }
+
+        .member-department {
+            color: var(--color-accent);
+            font-size: 0.8rem;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: var(--color-primary);
+            cursor: pointer;
+        }
+
+        .modal-photo {
+            width: 250px;
+            height: 250px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .modal-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .team-section {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="team-container">
+        <div class="team-title">
+            <h1>Our Incredible Team</h1>
+        </div>
+
+        <div id="teamContent" class="team-sections"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="memberModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modalPhoto" class="modal-photo"></div>
+            <h2 id="modalName" class="member-name"></h2>
+            <p id="modalRole" class="member-role"></p>
+            <p id="modalDepartment" class="member-department"></p>
+            <p id="modalDescription"></p>
+            <div id="modalSocial" class="modal-social"></div>
+        </div>
+    </div>
+
+    <script>
+        // Extended Team data structure with more details
+        const teamData = {
+            leadership: [
+                { 
+                    name: 'Ezar', 
+                    role: 'Team Leader', 
+                    department: 'Leadership',
+                    description: 'Visionary leader with 10+ years of experience in team management and strategic planning.',
+                    instagram: '@ezar_leader',
+                    linkedin: 'ezar-linkedin',
+                    email: 'ezar@company.com'
+                }
+            ],
+            productManagement: [
+                { 
+                    name: 'Felix', 
+                    role: 'Product Manager', 
+                    department: 'Product Management',
+                    description: 'Innovative product strategist passionate about creating user-centric solutions.',
+                    instagram: '@felix_pm',
+                    linkedin: 'felix-linkedin',
+                    email: 'felix@company.com'
+                }
+            ],
+            softwareDevelopment: [
+                { 
+                    name: 'Adista', 
+                    role: 'Software Developer', 
+                    department: 'Software Development',
+                    description: 'Full-stack developer specializing in cutting-edge web technologies.',
+                    instagram: '@adista_dev',
+                    linkedin: 'adista-linkedin',
+                    email: 'adista@company.com'
+                },
+                { 
+                    name: 'Akmal', 
+                    role: 'Software Developer', 
+                    department: 'Software Development',
+                    description: 'Backend expert with a passion for solving complex technical challenges.',
+                    instagram: '@akmal_dev',
+                    linkedin: 'akmal-linkedin',
+                    email: 'akmal@company.com'
+                },
+                { 
+                    name: 'Shera', 
+                    role: 'Software Developer', 
+                    department: 'Software Development',
+                    description: 'Frontend wizard creating seamless and intuitive user experiences.',
+                    instagram: '@shera_dev',
+                    linkedin: 'shera-linkedin',
+                    email: 'shera@company.com'
+                }
+            ],
+            design: [
+                { 
+                    name: 'Royan', 
+                    role: 'UI/UX Designer', 
+                    department: 'Design',
+                    description: 'Creative design professional transforming ideas into visual masterpieces.',
+                    instagram: '@royan_design',
+                    linkedin: 'royan-linkedin',
+                    email: 'royan@company.com'
+                },
+                { 
+                    name: 'Jelita', 
+                    role: 'UI/UX Designer', 
+                    department: 'Design',
+                    description: 'Design innovator with a keen eye for user experience and aesthetic details.',
+                    instagram: '@jelita_design',
+                    linkedin: 'jelita-linkedin',
+                    email: 'jelita@company.com'
+                },
+                { 
+                    name: 'Mufi', 
+                    role: 'UI/UX Designer', 
+                    department: 'Design',
+                    description: 'Brand identity expert creating compelling visual narratives.',
+                    instagram: '@mufi_design',
+                    linkedin: 'mufi-linkedin',
+                    email: 'mufi@company.com'
+                }
+            ],
+            dataAnalysis: [
+                { 
+                    name: 'Majid', 
+                    role: 'Data Analyst', 
+                    department: 'Data Analysis',
+                    description: 'Data storyteller turning complex data into actionable insights.',
+                    instagram: '@majid_data',
+                    linkedin: 'majid-linkedin',
+                    email: 'majid@company.com'
+                },
+                { 
+                    name: 'Nishfu', 
+                    role: 'Data Analyst', 
+                    department: 'Data Analysis',
+                    description: 'Statistical genius uncovering hidden patterns and trends.',
+                    instagram: '@nishfu_data',
+                    linkedin: 'nishfu-linkedin',
+                    email: 'nishfu@company.com'
+                }
+            ],
+            marketing: [
+                { 
+                    name: 'Yuki', 
+                    role: 'Marketing Specialist', 
+                    department: 'Marketing',
+                    description: 'Digital marketing strategist driving brand growth and engagement.',
+                    instagram: '@yuki_marketing',
+                    linkedin: 'yuki-linkedin',
+                    email: 'yuki@company.com'
+                },
+                { 
+                    name: 'Revaldo', 
+                    role: 'Marketing Specialist', 
+                    department: 'Marketing',
+                    description: 'Creative marketing expert crafting compelling brand stories.',
+                    instagram: '@revaldo_marketing',
+                    linkedin: 'revaldo-linkedin',
+                    email: 'revaldo@company.com'
+                }
+            ]
+        };
+
+        // Function to create team section
+        function createTeamSection(sectionName, sectionTitle) {
+            const section = document.createElement('div');
+            section.className = 'team-section';
+
+            const sectionTitleEl = document.createElement('h2');
+            sectionTitleEl.className = 'section-title';
+            sectionTitleEl.textContent = sectionTitle;
+            section.appendChild(sectionTitleEl);
+
+            const grid = document.createElement('div');
+            grid.className = 'team-grid';
+
+            teamData[sectionName].forEach(member => {
+                const memberEl = document.createElement('div');
+                memberEl.className = 'team-member';
+                memberEl.dataset.member = JSON.stringify(member);
+
+                const photoEl = document.createElement('div');
+                photoEl.className = 'member-photo';
+                photoEl.textContent = member.name.charAt(0);
+
+                const nameEl = document.createElement('div');
+                nameEl.className = 'member-name';
+                nameEl.textContent = member.name;
+
+                const roleEl = document.createElement('div');
+                roleEl.className = 'member-role';
+                roleEl.textContent = member.role;
+
+                const departmentEl = document.createElement('div');
+                departmentEl.className = 'member-department';
+                departmentEl.textContent = member.department;
+
+                memberEl.appendChild(photoEl);
+                memberEl.appendChild(nameEl);
+                memberEl.appendChild(roleEl);
+                memberEl.appendChild(departmentEl);
+
+                // Add click event to show modal
+                memberEl.addEventListener('click', showMemberModal);
+
+                grid.appendChild(memberEl);
+            });
+
+            section.appendChild(grid);
+            return section;
+        }
+
+        // Show member modal
+        function showMemberModal(event) {
+            const member = JSON.parse(event.currentTarget.dataset.member);
+            const modal = document.getElementById('memberModal');
+            const modalPhoto = document.getElementById('modalPhoto');
+            const modalName = document.getElementById('modalName');
+            const modalRole = document.getElementById('modalRole');
+            const modalDepartment = document.getElementById('modalDepartment');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalSocial = document.getElementById('modalSocial');
+
+            // Set modal content
+            modalPhoto.textContent = member.name.charAt(0);
+            modalName.textContent = member.name;
+            modalRole.textContent = member.role;
+            modalDepartment.textContent = member.department;
+            modalDescription.textContent = member.description;
+
+            // Clear previous social links
+            modalSocial.innerHTML = '';
+
+            // Add social links
+            const socialLinks = [
+                { 
+                    name: 'Instagram', 
+                    link: member.instagram, 
+                    icon: 'IG' 
+                },
+                { 
+                    name: 'LinkedIn', 
+                    link: member.linkedin, 
+                    icon: 'LI' 
+                },
+                { 
+                    name: 'Email', 
+                    link: `mailto:${member.email}`, 
+                    icon: '✉' 
+                }
+            ];
+
+            socialLinks.forEach(social => {
+                if (social.link) {
+                    const socialLink = document.createElement('a');
+                    socialLink.href = social.link;
+                    socialLink.className = 'social-icon';
+                    socialLink.textContent = social.icon;
+                    socialLink.target = social.name !== 'Email' ? '_blank' : '_self';
+                    modalSocial.appendChild(socialLink);
+                }
+            });
+
+            // Show the modal
+            modal.style.display = 'flex';
+        }
+
+        // Close modal when clicking on close button or outside the modal
+        function setupModalClose() {
+            const modal = document.getElementById('memberModal');
+            const closeBtn = document.querySelector('.modal-close');
+
+            // Close when clicking the close button
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // Close when clicking outside the modal content
+            modal.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Render team sections
+        function renderTeam() {
+            const teamContent = document.getElementById('teamContent');
+            const sections = [
+                { name: 'leadership', title: 'Leadership' },
+                { name: 'productManagement', title: 'Product Management' },
+                { name: 'softwareDevelopment', title: 'Software Development' },
+                { name: 'design', title: 'Design' },
+                { name: 'dataAnalysis', title: 'Data Analysis' },
+                { name: 'marketing', title: 'Marketing' }
+            ];
+
+            sections.forEach(section => {
+                if (teamData[section.name].length > 0) {
+                    teamContent.appendChild(
+                        createTeamSection(section.name, section.title)
+                    );
+                }
+            });
+        }
+
+        // Initialize the team page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTeam();
+            setupModalClose();
+        });
+    </script>
+</body>
+</html>
