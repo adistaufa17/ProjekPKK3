@@ -11,7 +11,7 @@ body {
 }
 
 .sidebar {
-    width: 200px;
+    width: 160px;
     background-color: #0b3a5d;
     color: white;
     padding: 20px 0;
@@ -48,8 +48,8 @@ body {
 }
 
 .container {
-    margin-left: 200px;
-    width: calc(100% - 200px);
+    margin-left: 160px;
+    width: calc(100% - 160px);
     overflow-y: auto;
 }
 
@@ -111,7 +111,7 @@ body {
 .selected {
     border: 3px solid #000;
 }
-/* Room popup details - style baru */
+
 .room-popup {
     position: fixed;
     bottom: 0;
