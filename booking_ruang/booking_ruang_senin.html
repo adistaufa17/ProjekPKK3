@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Booking Ruang</title>
+    <link rel="stylesheet" href="styleBookingRuang/style_booking_ruang.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img src="styleberanda/logo.png" alt="Logo" class="logo">
+        <ul class="menu">
+            <li class="menu-item"><a href="detail_laporan.html"><i class="fas fa-user-shield"></i> Admin</a></li>
+            <li class="menu-item"><a href="beranda.html"><i class="fas fa-calendar-check"></i> Beranda</a></li>
+            <li class="menu-item"><a href="booking_hari.html"><i class="fas fa-door-open"></i> Booking Ruang</a></li>
+            <li class="menu-item"><a href="team_developer.html"><i class="fa-solid fa-people-group"></i>Team Penggerak</a></li>
+          </ul>    
+    </div>
+    <div class="main-content">
+
+    <div class="main-content">
+            <div class="header">GEDUNG A</div>
+            <div class="room-grid">
+                <!-- Row 1 -->
+            <div class="room-row">
+                <div class="room available" data-room="1A">A101</div>
+                <div class="room available" data-room="1B">A102</div>
+                <div class="room available" data-room="1C">A103</div>
+                <div class="room available" data-room="1D">A104</div>
+                <div class="room available" data-room="1E">A105</div>
+                <div class="room available" data-room="1F">A106</div>
+                <div class="room available" data-room="1G">A107</div>
+                <div class="room available" data-room="1H">A108</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="room-row">
+                <div class="room available" data-room="2A">C101</div>
+                <div class="room available" data-room="2B">C101</div>
+                <div class="room available" data-room="2C">C101</div>
+                <div class="room available" data-room="2D">C101</div>
+                <div class="room available" data-room="2E">C101</div>
+                <div class="room available" data-room="2F">C101</div>
+                <div class="room available" data-room="2G">C101</div>
+                <div class="room available selected" data-room="2H">C101</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="room-row">
+                <div class="room available" data-room="3A">C201</div>
+                <div class="room available" data-room="3B">C201</div>
+                <div class="room available" data-room="3C">C201</div>
+                <div class="room available" data-room="3D">C201</div>
+                <div class="room available" data-room="3E">C201</div>
+                <div class="room available" data-room="3F">C201</div>
+                <div class="room available" data-room="3G">C201</div>
+                <div class="room available" data-room="3H">C201</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="room-row">
+                <div class="room available" data-room="4A">C101</div>
+                <div class="room available" data-room="4B">C101</div>
+                <div class="room available" data-room="4C">C101</div>
+                <div class="room available" data-room="4D">C101</div>
+                <div class="room available" data-room="4E">C101</div>
+                <div class="room available" data-room="4F">C101</div>
+                <div class="room available" data-room="4G">C101</div>
+                <div class="room available" data-room="4H">C101</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="room-row">
+                <div class="room available" data-room="5A">C101</div>
+                <div class="room available" data-room="5B">C101</div>
+                <div class="room available" data-room="5C">C101</div>
+                <div class="room available" data-room="5D">C101</div>
+                <div class="room available" data-room="5E">C101</div>
+                <div class="room available" data-room="5F">C101</div>
+                <div class="room available" data-room="5G">C101</div>
+                <div class="room available" data-room="5H">C101</div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="header">GEDUNG B</div>
+        <div class="room-grid">
+            <!-- Row 1 -->
+            <div class="room-row">
+                <div class="room available" data-room="1A">C101</div>
+                <div class="room available" data-room="1B">C101</div>
+                <div class="room available" data-room="1C">C101</div>
+                <div class="room available" data-room="1D">C101</div>
+                <div class="room available" data-room="1E">C101</div>
+                <div class="room available" data-room="1F">C101</div>
+                <div class="room available" data-room="1G">C101</div>
+                <div class="room available" data-room="1H">C101</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="room-row">
+                <div class="room available" data-room="2A">C101</div>
+                <div class="room available" data-room="2B">C101</div>
+                <div class="room available" data-room="2C">C101</div>
+                <div class="room available" data-room="2D">C101</div>
+                <div class="room available" data-room="2E">C101</div>
+                <div class="room available" data-room="2F">C101</div>
+                <div class="room available" data-room="2G">C101</div>
+                <div class="room available selected" data-room="2H">C101</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="room-row">
+                <div class="room available" data-room="3A">C201</div>
+                <div class="room available" data-room="3B">C201</div>
+                <div class="room available" data-room="3C">C201</div>
+                <div class="room available" data-room="3D">C201</div>
+                <div class="room available" data-room="3E">C201</div>
+                <div class="room available" data-room="3F">C201</div>
+                <div class="room available" data-room="3G">C201</div>
+                <div class="room available" data-room="3H">C201</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="room-row">
+                <div class="room available" data-room="4A">C101</div>
+                <div class="room available" data-room="4B">C101</div>
+                <div class="room available" data-room="4C">C101</div>
+                <div class="room available" data-room="4D">C101</div>
+                <div class="room available" data-room="4E">C101</div>
+                <div class="room available" data-room="4F">C101</div>
+                <div class="room available" data-room="4G">C101</div>
+                <div class="room available" data-room="4H">C101</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="room-row">
+                <div class="room available" data-room="5A">C101</div>
+                <div class="room available" data-room="5B">C101</div>
+                <div class="room available" data-room="5C">C101</div>
+                <div class="room available" data-room="5D">C101</div>
+                <div class="room available" data-room="5E">C101</div>
+                <div class="room available" data-room="5F">C101</div>
+                <div class="room available" data-room="5G">C101</div>
+                <div class="room available" data-room="5H">C101</div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="header">GEDUNG C</div>
+        <div class="room-grid">
+            <!-- Row 1 -->
+            <div class="room-row">
+                <div class="room available" data-room="1A">C101</div>
+                <div class="room available" data-room="1B">C101</div>
+                <div class="room available" data-room="1C">C101</div>
+                <div class="room available" data-room="1D">C101</div>
+                <div class="room available" data-room="1E">C101</div>
+                <div class="room available" data-room="1F">C101</div>
+                <div class="room available" data-room="1G">C101</div>
+                <div class="room available" data-room="1H">C101</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="room-row">
+                <div class="room available" data-room="2A">C101</div>
+                <div class="room available" data-room="2B">C101</div>
+                <div class="room available" data-room="2C">C101</div>
+                <div class="room available" data-room="2D">C101</div>
+                <div class="room available" data-room="2E">C101</div>
+                <div class="room available" data-room="2F">C101</div>
+                <div class="room available" data-room="2G">C101</div>
+                <div class="room available selected" data-room="2H">C101</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="room-row">
+                <div class="room available" data-room="3A">C201</div>
+                <div class="room available" data-room="3B">C201</div>
+                <div class="room available" data-room="3C">C201</div>
+                <div class="room available" data-room="3D">C201</div>
+                <div class="room available" data-room="3E">C201</div>
+                <div class="room available" data-room="3F">C201</div>
+                <div class="room available" data-room="3G">C201</div>
+                <div class="room available" data-room="3H">C201</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="room-row">
+                <div class="room available" data-room="4A">C101</div>
+                <div class="room available" data-room="4B">C101</div>
+                <div class="room available" data-room="4C">C101</div>
+                <div class="room available" data-room="4D">C101</div>
+                <div class="room available" data-room="4E">C101</div>
+                <div class="room available" data-room="4F">C101</div>
+                <div class="room available" data-room="4G">C101</div>
+                <div class="room available" data-room="4H">C101</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="room-row">
+                <div class="room available" data-room="5A">C101</div>
+                <div class="room available" data-room="5B">C101</div>
+                <div class="room available" data-room="5C">C101</div>
+                <div class="room available" data-room="5D">C101</div>
+                <div class="room available" data-room="5E">C101</div>
+                <div class="room available" data-room="5F">C101</div>
+                <div class="room available" data-room="5G">C101</div>
+                <div class="room available" data-room="5H">C101</div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="header">GEDUNG D</div>
+        <div class="room-grid">
+            <!-- Row 1 -->
+            <div class="room-row">
+                <div class="room available" data-room="1A">C101</div>
+                <div class="room available" data-room="1B">C101</div>
+                <div class="room available" data-room="1C">C101</div>
+                <div class="room available" data-room="1D">C101</div>
+                <div class="room available" data-room="1E">C101</div>
+                <div class="room available" data-room="1F">C101</div>
+                <div class="room available" data-room="1G">C101</div>
+                <div class="room available" data-room="1H">C101</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="room-row">
+                <div class="room available" data-room="2A">C101</div>
+                <div class="room available" data-room="2B">C101</div>
+                <div class="room available" data-room="2C">C101</div>
+                <div class="room available" data-room="2D">C101</div>
+                <div class="room available" data-room="2E">C101</div>
+                <div class="room available" data-room="2F">C101</div>
+                <div class="room available" data-room="2G">C101</div>
+                <div class="room available" data-room="2H">C101</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="room-row">
+                <div class="room available" data-room="3A">C201</div>
+                <div class="room available" data-room="3B">C201</div>
+                <div class="room available" data-room="3C">C201</div>
+                <div class="room available" data-room="3D">C201</div>
+                <div class="room available" data-room="3E">C201</div>
+                <div class="room available" data-room="3F">C201</div>
+                <div class="room available" data-room="3G">C201</div>
+                <div class="room available" data-room="3H">C201</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="room-row">
+                <div class="room available" data-room="4A">C101</div>
+                <div class="room available" data-room="4B">C101</div>
+                <div class="room available" data-room="4C">C101</div>
+                <div class="room available" data-room="4D">C101</div>
+                <div class="room available" data-room="4E">C101</div>
+                <div class="room available" data-room="4F">C101</div>
+                <div class="room available" data-room="4G">C101</div>
+                <div class="room available" data-room="4H">C101</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="room-row">
+                <div class="room available" data-room="5A">C101</div>
+                <div class="room available" data-room="5B">C101</div>
+                <div class="room available" data-room="5C">C101</div>
+                <div class="room available" data-room="5D">C101</div>
+                <div class="room available" data-room="5E">C101</div>
+                <div class="room available" data-room="5F">C101</div>
+                <div class="room available" data-room="5G">C101</div>
+                <div class="room available" data-room="5H">C101</div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="header">GEDUNG E</div>
+        <div class="room-grid">
+            <!-- Row 1 -->
+            <div class="room-row">
+                <div class="room available" data-room="1A">C101</div>
+                <div class="room available" data-room="1B">C101</div>
+                <div class="room available" data-room="1C">C101</div>
+                <div class="room available" data-room="1D">C101</div>
+                <div class="room available" data-room="1E">C101</div>
+                <div class="room available" data-room="1F">C101</div>
+                <div class="room available" data-room="1G">C101</div>
+                <div class="room available" data-room="1H">C101</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="room-row">
+                <div class="room available" data-room="2A">C101</div>
+                <div class="room available" data-room="2B">C101</div>
+                <div class="room available" data-room="2C">C101</div>
+                <div class="room available" data-room="2D">C101</div>
+                <div class="room available" data-room="2E">C101</div>
+                <div class="room available" data-room="2F">C101</div>
+                <div class="room available" data-room="2G">C101</div>
+                <div class="room available selected" data-room="2H">C101</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="room-row">
+                <div class="room available" data-room="3A">C201</div>
+                <div class="room available" data-room="3B">C201</div>
+                <div class="room available" data-room="3C">C201</div>
+                <div class="room available" data-room="3D">C201</div>
+                <div class="room available" data-room="3E">C201</div>
+                <div class="room available" data-room="3F">C201</div>
+                <div class="room available" data-room="3G">C201</div>
+                <div class="room available" data-room="3H">C201</div>
+            </div>
+            <!-- Row 4 -->
+            <div class="room-row">
+                <div class="room available" data-room="4A">C101</div>
+                <div class="room available" data-room="4B">C101</div>
+                <div class="room available" data-room="4C">C101</div>
+                <div class="room available" data-room="4D">C101</div>
+                <div class="room available" data-room="4E">C101</div>
+                <div class="room available" data-room="4F">C101</div>
+                <div class="room available" data-room="4G">C101</div>
+                <div class="room available" data-room="4H">C101</div>
+            </div>
+            <!-- Row 5 -->
+            <div class="room-row">
+                <div class="room available" data-room="5A">C101</div>
+                <div class="room available" data-room="5B">C101</div>
+                <div class="room available" data-room="5C">C101</div>
+                <div class="room available" data-room="5D">C101</div>
+                <div class="room available" data-room="5E">C101</div>
+                <div class="room available" data-room="5F">C101</div>
+                <div class="room available" data-room="5G">C101</div>
+                <div class="room available" data-room="5H">C101</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Room Popup Details - Desain Baru -->
+<div class="room-popup">
+    <div class="room-details">
+        <div class="booking-message">
+            <p>Anda ingin mem-booking ruang <span class="selected-room">C101</span> di hari <span class="selected-day">SENIN</span>?</p>
+        </div>
+        <div class="buttons">
+            <button class="button button-cancel">Kembali</button>
+            <button class="button button-next">Lanjut</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        localStorage.removeItem('roomBookings');
+    // Get all room elements
+    const rooms = document.querySelectorAll('.room');
+    const popup = document.querySelector('.room-popup');
+    const cancelBtn = document.querySelector('.button-cancel');
+    const nextBtn = document.querySelector('.button-next');
+    
+    // Store currently selected room
+    let selectedRoom = null;
+    let selectedDay = null;
+    
+    // Initialize with currently selected rooms
+    const initialSelectedRoom = document.querySelector('.selected');
+    if (initialSelectedRoom) {
+        selectedRoom = initialSelectedRoom.textContent.trim();
+        selectedDay = initialSelectedRoom.closest('.main-content').querySelector('.header').textContent.trim();
+    }
+    
+    // Load saved bookings and mark rooms as booked
+    loadBookings();
+    
+    // Add click event to each room
+    rooms.forEach(room => {
+        room.addEventListener('click', function() {
+            // Don't allow booking already booked rooms
+            if (this.classList.contains('booked')) {
+                alert('Ruangan ini sudah di-booking.');
+                return;
+            }
+            
+            // Get room ID and day
+            const roomId = this.textContent.trim();
+            const day = this.closest('.main-content').querySelector('.header').textContent.trim();
+            
+            // Store selected room info
+            selectedRoom = roomId;
+            selectedDay = day;
+            
+            // Highlight the selected room (remove previous selections first)
+            document.querySelectorAll('.selected').forEach(r => r.classList.remove('selected'));
+            this.classList.add('selected');
+            
+            // Update popup message
+            updatePopup(roomId, day);
+            
+            // Show popup
+            popup.style.display = 'block';
+        });
+    });
+    
+    // Update popup message with room and day info
+    function updatePopup(roomId, day) {
+        const selectedRoomElement = popup.querySelector('.selected-room');
+        const selectedDayElement = popup.querySelector('.selected-day');
+        
+        selectedRoomElement.textContent = roomId;
+        selectedDayElement.textContent = day;
+    }
+    
+    // Hide popup when cancel button is clicked
+    cancelBtn.addEventListener('click', function() {
+        popup.style.display = 'none';
+    });
+    
+    // Handle next button click
+    nextBtn.addEventListener('click', function() {
+        // Get current selected room and day
+        const roomId = popup.querySelector('.selected-room').textContent;
+        const day = popup.querySelector('.selected-day').textContent;
+        
+        // Redirect ke halaman formbookingan.html dengan parameter ruangan dan hari
+        window.location.href = `formpembookingan.html?room=${encodeURIComponent(roomId)}&day=${encodeURIComponent(day)}`;
+    });
+    
+    // Fungsi untuk memuat data booking dari localStorage
+function loadBookings() {
+    const bookings = JSON.parse(localStorage.getItem('roomBookings')) || {};
+    
+    // Loop through all rooms
+    const rooms = document.querySelectorAll('.room');
+    rooms.forEach(room => {
+        const roomId = room.textContent.trim();
+        const day = room.closest('.main-content').querySelector('.header').textContent.trim();
+        
+        // Check if this room is booked on this day
+        if (bookings[day] && bookings[day].includes(roomId)) {
+            // Mark room as booked
+            room.classList.remove('available');
+            room.classList.add('booked');
+        } else if (!room.classList.contains('booked')) {
+            // Pastikan ruangan yang belum dibooking tetap hijau (available)
+            room.classList.remove('booked');
+            room.classList.add('available');
+        }
+    });
+}
+});
+</script>
+</body>
+</html>
