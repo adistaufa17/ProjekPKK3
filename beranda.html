@@ -69,5 +69,29 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        let navbar = document.querySelector('.navbar');
+        let lastScrollTop = 0;
+
+        // Navbar visible by default
+        navbar.classList.add('active');
+
+        window.onscroll = () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
+                // Scrolling down past 50px - keep navbar visible
+                navbar.classList.add('active');
+            } else if (scrollTop <= lastScrollTop && scrollTop > 50) {
+                // Scrolling up past 50px - hide navbar
+                navbar.classList.remove('active');
+            } else if (scrollTop <= 50) {
+                // At top of page - show navbar
+                navbar.classList.add('active');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }
+    </script>
+    
 </body>
 </html>
