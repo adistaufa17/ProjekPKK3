@@ -39,9 +39,12 @@
   .menu-item {
     padding: 12px 20px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none;
+    transition: background-color 0.3s, padding-left 0.3s;
     color: white;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   
   .menu-item a {
@@ -52,6 +55,7 @@
   
   .menu-item:hover {
     background-color: #1a5380;
+    padding-left: 25px;
   }
   
   .container {
