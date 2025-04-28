@@ -1,113 +1,268 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Variables */
+:root {
+  --sidebar-color: #1a2b47;
+  --sidebar-hover: #2e4064;
+  --sidebar-active: #3a5280;
+  --header-color: #3498db;
+  --card-color: #fff;
+  --card-hover: #f5f5f5;
+  --text-primary: #fff;
+  --text-dark: #333;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s ease;
+}
+
+/* Sidebar */
+/* .sidebar {
+  width: 280px;
+  background-color: var(--sidebar-color);
+  color: var(--text-primary);
+  padding: 25px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+} */
+
+.logo {
+  width: 110px;
+  height: 110px;
+  margin-bottom: 35px;
+  filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.2));
+  transition: var(--transition);
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.menu {
+  list-style: none;
+  width: 100%;
+}
+
+.menu-item {
+  margin: 5px 0;
+  border-radius: 0 25px 25px 0;
+  transition: var(--transition);
+}
+
+.menu-item a {
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: var(--transition);
+}
+
+.menu-item:hover {
+  background-color: var(--sidebar-hover);
+}
+
+.menu-item:hover a {
+  transform: translateX(5px);
+}
+
+.menu-item.active {
+  background-color: var(--sidebar-active);
+}
+
+.menu-item i {
+  font-size: 18px;
+  width: 25px;
+  text-align: center;
+}
+
+/* Container and Main Content */
+.container {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  height: 100vh;
+  background: linear-gradient(rgba(26, 43, 71, 0.7), rgba(36, 59, 85, 0.8)), 
+    url('fotompk.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
+}
+
+.main-content {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: var(--header-color);
+  color: var(--text-primary);
+  padding: 20px;
+  font-weight: 600;
+  font-size: 24px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  to {
+    left: 100%;
   }
-  
-  body {
-    display: flex;
-    height: 100vh;
-  }
-  
-  /* Sidebar */
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+}
+
+/* Kartu Hari */
+.card {
+  background-color: var(--card-color);
+  width: 220px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-dark);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--header-color), #2980b9);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  color: var(--text-primary);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
   .sidebar {
-    width: 260px;
-    background-color: #0b3a5d;
-    color: white;
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
+    width: 70px;
+    padding: 15px 0;
   }
   
   .logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 30px;
-  }
-  
-  .menu {
-    list-style: none;
-    width: 100%;
-  }
-  
-  .menu-item {
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s, padding-left 0.3s;
-    color: white;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 25px;
   }
   
   .menu-item a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
+    padding: 15px;
+    justify-content: center;
   }
   
-  .menu-item:hover {
-    background-color: #1a5380;
-    padding-left: 25px;
+  .menu-item a span {
+    display: none;
   }
   
   .container {
-    margin-left: 160px;
-    width: calc(100% - 160px);
-    overflow-y: auto;
-    background-color: #f9e8c0;
+    margin-left: 70px;
+    width: calc(100% - 70px);
   }
   
   .main-content {
-    margin-left: 6%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .header {
-    background-color: #7fb3d5;
-    color: white;
-    padding: 15px 20px;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
+    padding: 15px;
   }
   
   .grid {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    padding: 40px;
+    gap: 15px;
   }
   
-  /* Kartu Hari */
   .card {
-    background-color: white;
-    width: 200px;
+    width: 140px;
     height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    border-radius: 5px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: transform 0.2s ease;
     font-size: 16px;
   }
-  
-  .card:hover {
-    transform: scale(1.05);
+}
+
+@media screen and (max-width: 480px) {
+  .grid {
+    flex-direction: column;
+    gap: 15px;
   }
   
+  .card {
+    width: 100%;
+  }
+  
+  .header {
+    font-size: 20px;
+    padding: 15px;
+  }
+}
+
+/* Optional: Animation for page load */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.main-content {
+  animation: fadeIn 0.8s ease;
+}
